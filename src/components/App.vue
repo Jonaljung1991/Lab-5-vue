@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-      <button @>Add new contact</button>
-<!--    <contact-card />*-->
+    <contact-card v-on:add="addcontact"/>
   </div>
 </template>
 
@@ -10,7 +9,20 @@
     export default {
         name: 'app',
         components: {
-            "contact-card": contactCard
+            "contact-card": contactCard, 
+        },
+        data:function(){
+            return {
+                userlist : []
+            }
+        },
+        methods:{
+            addcontact:function(obj){
+                console.log("hej");
+              
+                this.userlist.push(obj);   
+                   console.log(this.userlist);
+            }
         }
     }
 </script>
