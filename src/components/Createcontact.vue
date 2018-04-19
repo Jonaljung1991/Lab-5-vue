@@ -7,7 +7,7 @@
     <img :src="imgUrl">
     </div>
     <div class="edit">
-    <label id="editMe">Edit contact
+    <label id="editMe">Create contact
     <input type="checkbox" for="editMe" v-model = "editable" >
         </label>
     </div>
@@ -42,26 +42,27 @@
                 imgUrl: " https://cdn.pixabay.com/photo/2016/08/31/11/54/user-1633249__340.png",
                 name: "",
                 email: "",
-                age: ""
+                age: "",
+                id : 0
             }
         },
         methods: {
             isEditable: function(event) {
                 let url = (this.imgUrl);
-                console.log(url);
                 let name = (this.name);
-                console.log(name);
                 let email = (this.email);
-                console.log(email);
                 let age = (this.age);
-                console.log(age);
+                let id = (this.id);
+                
                 this.$emit("add", {
                     Url: url,
                     Name: name,
                     Email: email,
-                    Age: age
-                });
-
+                    Age: age,
+                    Edit : false,
+                    Id : 0
+                })
+                this.id += 1;
             }
         }
     };
@@ -75,14 +76,15 @@
     }
 
     .cardBody {
+        opacity: 0.9;
         display: flex;
         flex-direction: column;
         width: 400px;
         height: 250px;
         padding: 25px;
         border-radius: 4px;
-        box-shadow: 4px 2px 4px 2px gray;
-        background-color: #f4f4f4
+        box-shadow: 2px 4px 7px 3px black;
+        background-color: white;
     }
 
     .upperSection {
@@ -151,6 +153,7 @@
     .editFalse>div {
         display: flex;
         flex-direction: row;
+        align-items: center;
         padding: 1em;
     }
 
@@ -175,7 +178,13 @@
     }
     button {
         width: 25%;
+        height: 45px;
         border-radius: 4px;
         align-self: flex-end;
+        background-color: #00ff00;
+        color: white;
+        font-size: 1.1rem;
+        border-style: none;
+        opacity: 0.9;
     }
 </style>
