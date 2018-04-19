@@ -3,6 +3,7 @@
       <h1>Online contacts</h1>
     <contact-card v-on:add="addcontact"/>
       <div class="separation"></div>
+      <h1>ContactList</h1>
    <contact-list v-bind:contacts="userlist" v-on:editSpecific = "changeValues" v-on:editTrue = "editStatus"/>
   </div>
 </template>
@@ -51,8 +52,6 @@
                 }
             },
             editStatus: function(index,status) {
-                console.log(index);
-                console.log(status);
                  for (let i = 0; i < this.userlist.length; i++) {
                     if (i === index) {
                     
@@ -81,18 +80,32 @@
         background-size: cover;
         z-index: -1;
     }
-
+    
     label {
         opacity: 0.9;
+        font-family: Comic Sans MS,cursive, sans-seriff;
+        font-size: 1.3rem;
+    }
+    
+    input{
+        font-family: Comic Sans MS,cursive, sans-seriff;
+    }
+    
+    span{
+        font-family: Comic Sans MS,cursive, sans-seriff;
+        font-size: 1.1rem;
+    }
+    
+    h1{
+        opacity: 0.9;
+        font-family: Tahoma,Geneva,sans-serif;
+        font-size: 3rem;
+        color:#ffff66;
     }
 </style>
 
 <style scoped>
-    h1 {
-        color: white;
-        opacity: 0.9;
-        font-size: 3rem;
-    }
+
 
     .separation {
         width: 75vw;

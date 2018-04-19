@@ -60,8 +60,9 @@
                     Email: email,
                     Age: age,
                     Edit : false,
-                    Id : 0
+                    Id : id
                 })
+                console.log(this.id);
                 this.id += 1;
             }
         }
@@ -72,7 +73,6 @@
 <style scoped>
     .cardBody * {
         margin: 0;
-        font-family: arial;
     }
 
     .cardBody {
@@ -174,15 +174,15 @@
         border-style: none;
         border-bottom: 1.5px solid black;
         outline: none;
-        background-color: #f4f4f4;
+        background-color: white;
     }
     button {
         width: 25%;
         height: 45px;
         border-radius: 4px;
         align-self: flex-end;
-        background-color: #00ff00;
-        color: white;
+        background-color: lightgreen;
+        color: black;
         font-size: 1.1rem;
         border-style: none;
         opacity: 0.9;
