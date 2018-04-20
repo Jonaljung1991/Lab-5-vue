@@ -1,0 +1,22 @@
+CACHE MANIFEST
+#ver:2018-4-20 11:49:07
+#plugin:4.9.0
+
+CACHE:
+/client.48dc9b99.js
+/vendor.c0404951.js
+/manifest.95292176.js
+/client.b8aa557b.css
+/vendor.653da357.css
+/favicon.ico
+/manifest.json
+/icons/android-chrome-192x192.png
+/icons/android-chrome-512x512.png
+/imgs/address-book-black-and-white-business-205414.jpg
+/
+
+NETWORK:
+*
+
+FALLBACK:
+/ /
