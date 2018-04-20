@@ -7,15 +7,15 @@
             <div class="position">
                    <div class="edit">   
                         <label id="editMe">Edit
-                            <input type="checkbox" for="editMe" @click="isEditable(index)"  v-model="checked">
+                            <input type="checkbox" for="editMe" @click="isEditable( $event ,index)">
                         </label>
                         </div>
                 <div class="edittrue"  v-if="contact.Edit"> 
-                    <div><button @click="editcard(index)">Save</button></div>
+                    <div class="posButton"><button class="saveButt" @click="editcard(index , contact.imgUrl, contact.Name , contact.Email, contact.Age)">Save</button></div>
                     <div><label id="url">ImgURL</label> <input type="text" for="url" v-model="contact.imgUrl"></div>
-                    <div><label id="name">Name</label><input type="text" for="name" v-model="contact.name"></div>
-                    <div><label id="email">Email</label> <input type="text" for="email" v-model="contact.email"></div>
-                    <div> <label id="age">Age</label> <input type="text" for="age" v-model="contact.age"></div>
+                    <div><label id="name">Name</label><input type="text" for="name" v-model="contact.Name"></div>
+                    <div><label id="email">Email</label> <input type="text" for="email" v-model="contact.Email"></div>
+                    <div> <label id="age">Age</label> <input type="text" for="age" v-model="contact.Age"></div>
                    
                 </div>
                 
@@ -29,6 +29,7 @@
                    <div>
                             <span> Age</span><p>{{ contact.Age }}</p>
                    </div>
+                    <div><remove-button @removethis ="removeCard (index)"/></remove-button></div>
                </div>
              </div>
                
@@ -37,11 +38,14 @@
 </template>
 
 <script>
+    import removeBut from "./RemoveContact.vue";
     export default {
         props: ['contacts'],
+        components : {
+            "remove-button" : removeBut
+        },
         data: function() {
             return {
-                checked: null,
                 imgUrl: " https://cdn.pixabay.com/photo/2016/08/31/11/54/user-1633249__340.png",
                 name: "",
                 email: "",
@@ -49,26 +53,33 @@
             };
         },
         methods: {
-            isEditable : function(index){
-                console.log(this.checked);
-                    if (this.checked === true) {
-                       
-                        this.$emit("editTrue",index,true)
-                    } else {
-                           this.$emit("editTrue",index,false)
-                    }
-            },
-            editcard: function(index) {
-                    this.$emit("editSpecific" ,  index , {
-                        Url :this.imgUrl,
-                        Name : this.name,
-                        Email : this.email,
-                        Age : this.age
-                       
-                    })
+            isEditable: function(event, index) {
+                if (event.target.checked) {
+                    this.$emit("editTrue", index, true)
+
+                } else {
+                    this.$emit("editTrue", index, false)
                 }
+            },
+            editcard: function(index, url, name, email, age) {
+                console.log(index);
+                console.log(url);
+                console.log(name);
+                console.log(email);
+                console.log(age);
+                this.$emit("editSpecific", index, {
+                    Url: url,
+                    Name: name,
+                    Email: email,
+                    Age: age
+
+                })
+            },
+            removeCard : function(index){
+               this.$emit("removeC",index);
             }
         }
+    }
 </script>
 
 <style scoped>
@@ -86,7 +97,6 @@
         height: 200px;
         width: 40%;
         color: black;
-        border-style: solid;
         border-width: 3px;
         padding: 25px;
         box-shadow: 2px 4px 7px 3px black;
@@ -94,14 +104,27 @@
         border-radius: 4px;
         font-family: arial;
         margin: 10px;
+        transition: transform 0.4s;
     }
     
-    .book button {
-        width: 50px;
+    .book:hover{
+        transform: scale(1.06);
+    }
+     .position .edittrue .posButton{
+        display: flex;
+        justify-content:flex-end;
+        margin-top:20px;
+    }
+    .book .saveButt {
+        width: 70px;
         height: 30px;
-        background-color: red;
-        margin: 10px;
-/*        align-self: flex-end;*/
+        background-color: lightgreen;
+        border-style: none;
+        border-radius:4px;
+       font-family: Tahoma,Geneva,sans-serif;
+    }
+    .saveButt:hover{
+        background-color: #80ffaa;
     }
 
     .imgContainer {
@@ -111,7 +134,7 @@
 
     .imgContainer img {
         width: 100%;
-        height: 100%;
+        height: auto;
     }
 
     .position {
@@ -120,27 +143,47 @@
         flex-direction: column;
         justify-content: space-around;
         display: flex;
-        /*        border: 1.5px solid black;*/
         padding: 10px;
     }
-
-    .edittrue {
-         display: flex;
-        flex: 1;
-        flex-direction: column;
-        justify-content: center;
-        padding: 20px;
-
+    .editfalse{
+        margin-left: 30px;
     }
     
+    .editfalse div{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    
+    .editfalse div p{
+        margin-left: 25px;
+    }
+    .edittrue {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+    }
+
     .edittrue div {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        padding: 0.85em;
+        padding:0.85em 0 ;
     }
 
-    
+    .edittrue div label {
+    }
+
+    .edittrue div input{
+        width: 55%;
+        margin-left: 30px;
+        border-style:none;
+        border-bottom: 1.5px solid black;
+        background-color: #e6f2ff;
+        outline: none;
+    }
+
 
     .edit {
         display: flex;

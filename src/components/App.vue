@@ -3,7 +3,8 @@
       <h1>Online contacts</h1>
     <contact-card v-on:add="addcontact"/>
       <div class="separation"></div>
-   <contact-list v-bind:contacts="userlist" v-on:editSpecific = "changeValues" v-on:editTrue = "editStatus"/>
+      <h1>ContactList</h1>
+   <contact-list v-bind:contacts="userlist" v-on:editSpecific = "changeValues" v-on:editTrue = "editStatus" v-on:removeC="cutCard"/>
   </div>
 </template>
 
@@ -25,7 +26,7 @@
             addcontact: function(obj) {
                 console.log("hej");
 
-                this.userlist.push(obj);
+                this.userlist.unshift(obj);
                 console.log(this.userlist);
             },
             changeValues: function(index, obj) {
@@ -51,8 +52,6 @@
                 }
             },
             editStatus: function(index,status) {
-                console.log(index);
-                console.log(status);
                  for (let i = 0; i < this.userlist.length; i++) {
                     if (i === index) {
                     
@@ -60,7 +59,14 @@
                     
                     }
             }
-        }
+        },
+            cutCard : function(index){
+                for(let i = 0; i < this.userlist.length; i++){
+                    if(i === index){
+                        this.userlist.splice(i, 1);
+                    }
+                }
+            }
     }
     }
 </script>
@@ -81,18 +87,40 @@
         background-size: cover;
         z-index: -1;
     }
-
+    
     label {
         opacity: 0.9;
+        font-family: Comic Sans MS,cursive, sans-seriff;
+        font-size: 1.3rem;
+    }
+    
+    input{
+        font-family: Comic Sans MS,cursive, sans-seriff;
+    }
+    
+    input[type=checkbox]{
+        cursor: pointer;
+    }
+    
+    span{
+        font-family: Comic Sans MS,cursive, sans-seriff;
+        font-size: 1.1rem;
+    }
+    
+    h1{
+        opacity: 0.9;
+        font-family: Tahoma,Geneva,sans-serif;
+        font-size: 3rem;
+        color:#ffff66;
+    }
+    
+    button{
+        cursor: pointer;
     }
 </style>
 
 <style scoped>
-    h1 {
-        color: white;
-        opacity: 0.9;
-        font-size: 3rem;
-    }
+
 
     .separation {
         width: 75vw;
