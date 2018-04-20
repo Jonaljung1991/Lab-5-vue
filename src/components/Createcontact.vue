@@ -62,7 +62,12 @@
                     Edit : false,
                     Id : id
                 })
-                console.log(this.id);
+                
+                this.imgUrl ="https://cdn.pixabay.com/photo/2016/08/31/11/54/user-1633249__340.png";
+                this.name = "";
+                this.email = "";
+                this.age = "";
+                
                 this.id += 1;
             }
         }
@@ -186,5 +191,10 @@
         font-size: 1.1rem;
         border-style: none;
         opacity: 0.9;
+        font-family: Tahoma,Geneva,sans-serif;
+    }
+    
+    button:hover{
+        background-color: #80ffaa;
     }
 </style>

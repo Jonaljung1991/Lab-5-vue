@@ -4,7 +4,7 @@
     <contact-card v-on:add="addcontact"/>
       <div class="separation"></div>
       <h1>ContactList</h1>
-   <contact-list v-bind:contacts="userlist" v-on:editSpecific = "changeValues" v-on:editTrue = "editStatus"/>
+   <contact-list v-bind:contacts="userlist" v-on:editSpecific = "changeValues" v-on:editTrue = "editStatus" v-on:removeC="cutCard"/>
   </div>
 </template>
 
@@ -26,7 +26,7 @@
             addcontact: function(obj) {
                 console.log("hej");
 
-                this.userlist.push(obj);
+                this.userlist.unshift(obj);
                 console.log(this.userlist);
             },
             changeValues: function(index, obj) {
@@ -59,7 +59,14 @@
                     
                     }
             }
-        }
+        },
+            cutCard : function(index){
+                for(let i = 0; i < this.userlist.length; i++){
+                    if(i === index){
+                        this.userlist.splice(i, 1);
+                    }
+                }
+            }
     }
     }
 </script>
@@ -91,6 +98,10 @@
         font-family: Comic Sans MS,cursive, sans-seriff;
     }
     
+    input[type=checkbox]{
+        cursor: pointer;
+    }
+    
     span{
         font-family: Comic Sans MS,cursive, sans-seriff;
         font-size: 1.1rem;
@@ -101,6 +112,10 @@
         font-family: Tahoma,Geneva,sans-serif;
         font-size: 3rem;
         color:#ffff66;
+    }
+    
+    button{
+        cursor: pointer;
     }
 </style>
 

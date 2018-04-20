@@ -11,7 +11,7 @@
                         </label>
                         </div>
                 <div class="edittrue"  v-if="contact.Edit"> 
-                    <div class="posButton"><button @click="editcard(index , contact.imgUrl, contact.Name , contact.Email, contact.Age)">Save</button></div>
+                    <div class="posButton"><button class="saveButt" @click="editcard(index , contact.imgUrl, contact.Name , contact.Email, contact.Age)">Save</button></div>
                     <div><label id="url">ImgURL</label> <input type="text" for="url" v-model="contact.imgUrl"></div>
                     <div><label id="name">Name</label><input type="text" for="name" v-model="contact.Name"></div>
                     <div><label id="email">Email</label> <input type="text" for="email" v-model="contact.Email"></div>
@@ -29,6 +29,7 @@
                    <div>
                             <span> Age</span><p>{{ contact.Age }}</p>
                    </div>
+                    <div><remove-button @removethis ="removeCard (index)"/></remove-button></div>
                </div>
              </div>
                
@@ -37,8 +38,12 @@
 </template>
 
 <script>
+    import removeBut from "./RemoveContact.vue";
     export default {
         props: ['contacts'],
+        components : {
+            "remove-button" : removeBut
+        },
         data: function() {
             return {
                 imgUrl: " https://cdn.pixabay.com/photo/2016/08/31/11/54/user-1633249__340.png",
@@ -69,6 +74,9 @@
                     Age: age
 
                 })
+            },
+            removeCard : function(index){
+               this.$emit("removeC",index);
             }
         }
     }
@@ -89,7 +97,6 @@
         height: 200px;
         width: 40%;
         color: black;
-        border-style: solid;
         border-width: 3px;
         padding: 25px;
         box-shadow: 2px 4px 7px 3px black;
@@ -97,18 +104,27 @@
         border-radius: 4px;
         font-family: arial;
         margin: 10px;
+        transition: transform 0.4s;
+    }
+    
+    .book:hover{
+        transform: scale(1.06);
     }
      .position .edittrue .posButton{
         display: flex;
         justify-content:flex-end;
         margin-top:20px;
     }
-    .book button {
+    .book .saveButt {
         width: 70px;
         height: 30px;
         background-color: lightgreen;
         border-style: none;
         border-radius:4px;
+       font-family: Tahoma,Geneva,sans-serif;
+    }
+    .saveButt:hover{
+        background-color: #80ffaa;
     }
 
     .imgContainer {
@@ -118,7 +134,7 @@
 
     .imgContainer img {
         width: 100%;
-        height: 100%;
+        height: auto;
     }
 
     .position {
@@ -131,6 +147,16 @@
     }
     .editfalse{
         margin-left: 30px;
+    }
+    
+    .editfalse div{
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    
+    .editfalse div p{
+        margin-left: 25px;
     }
     .edittrue {
         display: flex;
