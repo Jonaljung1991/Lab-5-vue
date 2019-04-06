@@ -3,7 +3,7 @@
       <h1>Online contacts</h1>
     <contact-card v-on:add="addcontact"/>
       <div class="separation"></div>
-      <h1>ContactList</h1>
+      <h1>ContactList</h1>zz
    <contact-list v-bind:contacts="userlist" v-on:editSpecific = "changeValues" v-on:editTrue = "editStatus" v-on:removeC="cutCard"/>
   </div>
 </template>
